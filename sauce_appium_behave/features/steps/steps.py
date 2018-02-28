@@ -1,21 +1,21 @@
-from behave import given, then, when, step
+from behave import given, when, then
 
 
-@given('')
-def simpl_step(context):
-    pass
+@given('I click on the add contact button')
+def step_impl(context):
+    context.driver.find_element_by_id(
+        "com.example.android.contactmanager:id/addContactButton").click()
 
 
-@then('')
-def simpl_step(context):
-    pass
+@when('I enter a name and email')
+def step_impl(context):
+    context.driver.find_element_by_id(
+        "com.example.android.contactmanager:id/contactNameEditText").set_value("Some Name")
+    context.driver.find_element_by_id(
+        "com.example.android.contactmanager:id/contactEmailEditText").set_value("Some@example.com")
 
 
-@when('')
-def simpl_step(context):
-    pass
-
-
-@step('')
-def simpl_step(context):
-    pass
+@then('I click the Save button')
+def step_impl(context):
+    context.driver.find_element_by_id(
+        "com.example.android.contactmanager:id/contactSaveButton").click()

@@ -1,15 +1,6 @@
-Feature:
+Feature: Adding a contact via an Android App
 
-@use.with_config_0=False
-Scenario:
-  Given ...
-  When ...
-  Then ...
-
-Scenario Outline:
-    Given ...
-
-    Examples:
-      | foo   |  bar      |
-      | Alice |  1985     |
-      | Bob   |  1975     |
+  Scenario: Add a Contact
+    Given I click on the add contact button
+    When I enter a name and email
+    Then I click the Save button

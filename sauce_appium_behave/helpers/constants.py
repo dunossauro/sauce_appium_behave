@@ -1,1 +1,1 @@
-SAUCE_URL = 'http://%s:%s@ondemand.saucelabs.com:80/wd/hub'
+SAUCE_URL = 'http://{}:{}@ondemand.saucelabs.com:80/wd/hub'
