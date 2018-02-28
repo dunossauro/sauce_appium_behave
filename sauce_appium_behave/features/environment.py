@@ -3,6 +3,7 @@ from os import environ
 
 from appium import webdriver
 from behave.tag_matcher import ActiveTagMatcher
+from ipdb import post_mortem
 from sauceclient import SauceClient, Storage
 
 from sauce_appium_behave.helpers.constants import SAUCE_URL
@@ -70,3 +71,8 @@ def after_scenario(context, scenario):
         test_status = scenario.status == 'passed'
         context.sc.jobs.update_job(context.driver,
                                    passed=test_status)
+
+
+def after_step(context, step):
+    if context.config.userdata.get('debug') and step.status == "failed":
+        post_mortem(step.exc_traceback)
