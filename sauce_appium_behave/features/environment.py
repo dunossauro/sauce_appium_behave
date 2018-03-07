@@ -27,6 +27,7 @@ def before_all(context):
     context.apk_path = context.userdata['apk_path']
     context.device = context.userdata['device']
     context.version = context.userdata['platform_version']
+    context.target = context.userdata['target']
     context.sc = SauceClient(environ['SAUCE_USER'], environ['SAUCE_KEY'])
     context.storage = Storage(context.sc)
 
@@ -50,7 +51,7 @@ def before_scenario(context, scenario):
     if active_tag_matcher.should_exclude_with(scenario.effective_tags):
         scenario.skip(reason="DISABLED ACTIVE-TAG")
 
-    context.driver = define_caps(context.userdata['target'],
+    context.driver = define_caps(context.target,
                                  context.apk_name,
                                  context.device,
                                  context.version,
