@@ -4,7 +4,7 @@ from os.path import abspath
 def desired_caps(apk_path, apk_name,
                  platform_version='4.4',
                  device_name='Nexus_5X_API_19'):
-    """Return capabilities related to physical device."""
+    """Return capabilities related to emulator."""
     return {
         'platformName': 'Android',
         'newCommandTimeout': 3000,
