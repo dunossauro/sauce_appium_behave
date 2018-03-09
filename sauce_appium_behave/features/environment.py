@@ -1,4 +1,5 @@
 """Hooks file."""
+from json import loads
 from os import environ
 
 from behave.tag_matcher import ActiveTagMatcher
@@ -28,6 +29,7 @@ def before_all(context):
     context.device = context.userdata['device']
     context.version = context.userdata['platform_version']
     context.target = context.userdata['target']
+    context.optional_caps = context.userdata['optional_caps']
     context.sc = SauceClient(environ['SAUCE_USER'], environ['SAUCE_KEY'])
     context.storage = Storage(context.sc)
 
@@ -55,7 +57,8 @@ def before_scenario(context, scenario):
                                  context.apk_name,
                                  context.device,
                                  context.version,
-                                 apk_path=context.apk_path)
+                                 apk_path=context.apk_path,
+                                 external_caps=loads(context.optional_caps))
 
 
 def after_scenario(context, scenario):

@@ -9,17 +9,15 @@ APPIUM_URL = 'http://localhost:4723/wd/hub'
 
 
 def define_caps(target, apk_name, device_name,
-                platform_version, apk_path='../', **kwargs):
-    """
-    TODO.
-
-    implemente kwargs to upload caps
-    """
+                platform_version, apk_path='../', external_caps={}):
+    """TODO."""
     url = APPIUM_URL
     if target == 'sauce':
         url = SAUCE_URL.format(environ['SAUCE_USER'], environ['SAUCE_KEY'])
 
     target = eval(target)
     if hasattr(target, 'desired_caps'):
-        return webdriver.Remote(url, target.desired_caps(apk_path, apk_name))
+        capabilities = target.desired_caps(apk_path, apk_name)
+        capabilities.update(external_caps)
+        return webdriver.Remote(url, capabilities)
     return None
