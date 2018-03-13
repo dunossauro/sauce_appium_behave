@@ -49,7 +49,7 @@ def before_feature(context, feature):
 
 
 def before_scenario(context, scenario):
-    """TODO."""
+    """Create a generic driver using target to use in context."""
     if active_tag_matcher.should_exclude_with(scenario.effective_tags):
         scenario.skip(reason="DISABLED ACTIVE-TAG")
 
@@ -62,13 +62,10 @@ def before_scenario(context, scenario):
 
 
 def after_scenario(context, scenario):
-    """
-    TODO.
-
-    Implement try for update_job errors
-    """
     if hasattr(context, 'driver'):
         context.driver.quit()
+
+    if context.target == 'sauce':
         test_status = scenario.status == 'passed'
         context.sc.jobs.update_job(context.driver,
                                    passed=test_status)
